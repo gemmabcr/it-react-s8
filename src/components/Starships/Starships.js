@@ -3,23 +3,36 @@ import {Link} from "react-router-dom";
 
 const Starships = () => {
   const [starships, setStarships] = React.useState([]);
+  const [apiUrl, setApiUrl] = React.useState('https://swapi.py4e.com/api/starships');
+  const [page, setPage] = React.useState(1);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(()=>{
-    fetch('https://swapi.py4e.com/api/starships')
+    fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setStarships(data.results)
+        setApiUrl(data.next)
+        if (starships.length === 0) setStarships(data.results)
+        else setStarships(prevState => [...prevState, ...data.results])
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  },[])
+  },[page]);
 
   return(
     <div>
       <h1>Starships list</h1>
-      {starships.map(starship => {
+      {loading && <p>Loading</p>}
+      {!loading && starships.map((starship, index) => {
         const splitedUrlStarship = starship.url.split('/');
         const urlStarship = splitedUrlStarship[5]
         return (
-            <ul key={urlStarship}>
+            <ul key={index}>
+              <p>{index}</p>
               <li>Name: {starship.name}</li>
               <li>Model: {starship.model}</li>
               <li>URL: {starship.url}</li>
@@ -28,6 +41,7 @@ const Starships = () => {
           )
         }
       )}
+      {apiUrl !== null && <button onClick={() => setPage(prevState => prevState + 1)}>View more</button>}
     </div>
   )
 }
