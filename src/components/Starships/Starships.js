@@ -5,7 +5,7 @@ const Starships = () => {
   const [starships, setStarships] = React.useState([]);
 
   React.useEffect(()=>{
-    fetch('https://swapi.dev/api/starships/')
+    fetch('https://swapi.py4e.com/api/starships')
       .then((response) => response.json())
       .then((data) => {
         setStarships(data.results)

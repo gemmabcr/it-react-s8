@@ -3,21 +3,17 @@ import { useParams } from "react-router-dom";
 
 const StarshipDetail = () => {
   const {id} = useParams()
-  const [starships, setStarships] = React.useState([]);
   const [starship, setStarship] = React.useState([]);
 
   React.useEffect(()=>{
-    fetch('https://swapi.dev/api/starships/')
+    const STARSHIP_URL = `https://swapi.py4e.com/api/starships/${id}/`;
+    fetch(STARSHIP_URL)
       .then((response) => response.json())
       .then((data) => {
-        setStarships(data.results)
+        setStarship(data)
       });
   },[])
 
-  React.useEffect(()=>{
-    const result = starships.find(item => item.url === `https://swapi.dev/api/starships/${id}/`);
-    setStarship(result)
-  },[starships])
 
   return (
     <div>
