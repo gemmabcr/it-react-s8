@@ -19,8 +19,6 @@ const StarshipDetail = () => {
     setStarship(result)
   },[starships])
 
-  console.log(starship)
-
   return (
     <div>
       {starship !== undefined &&
