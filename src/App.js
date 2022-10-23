@@ -1,11 +1,9 @@
 import React from "react";
-import Starships from "./components/Starships/Starships";
+import Router from "./application/Router";
 
 function App() {
   return (
-    <div className="App">
-      <Starships/>
-    </div>
+    <Router/>
   );
 }
 
