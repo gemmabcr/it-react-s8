@@ -1,5 +1,13 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
+import {
+  StarshipCard,
+  StarshipCardTitle,
+  StarshipCardSubtitle,
+  StarshipButton,
+  StarshipButtonContainer
+} from "./StarshipsStyled";
 
 const Starships = () => {
   const [starships, setStarships] = React.useState([]);
@@ -25,23 +33,29 @@ const Starships = () => {
 
   return(
     <div>
-      <h1>Starships list</h1>
-      {loading && <p>Loading</p>}
-      {!loading && starships.map((starship, index) => {
-        const splitedUrlStarship = starship.url.split('/');
-        const urlStarship = splitedUrlStarship[5]
-        return (
-            <ul key={index}>
-              <p>{index}</p>
-              <li>Name: {starship.name}</li>
-              <li>Model: {starship.model}</li>
-              <li>URL: {starship.url}</li>
-              <Link to={`/starships/${urlStarship}`}>Details</Link>
-            </ul>
-          )
+      <Navbar />
+      <section>
+        {loading && <p>Loading</p>}
+        {!loading && starships.map((starship, index) => {
+          const splitedUrlStarship = starship.url.split('/');
+          const urlStarship = splitedUrlStarship[5]
+          return (
+            <Link to={`/starships/${urlStarship}`} key={index}>
+              <StarshipCard>
+                <StarshipCardTitle>{(starship.name).toUpperCase()}</StarshipCardTitle>
+                <StarshipCardSubtitle>{starship.model}</StarshipCardSubtitle>
+              </StarshipCard>
+            </Link>
+            )
+          }
+        )}
+        {/*TODO: Bonus - scroll infinit*/}
+        {apiUrl !== null &&
+          <StarshipButtonContainer>
+            <StarshipButton onClick={() => setPage(prevState => prevState + 1)}>View more</StarshipButton>
+          </StarshipButtonContainer>
         }
-      )}
-      {apiUrl !== null && <button onClick={() => setPage(prevState => prevState + 1)}>View more</button>}
+      </section>
     </div>
   )
 }
