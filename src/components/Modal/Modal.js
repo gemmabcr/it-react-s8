@@ -12,13 +12,26 @@ import {
   Flex5Baseline,
 } from "./ModalStyled";
 
-const Modal = ({show, setShow}) => {
-  const [loginForm, setLoginForm] = React.useState(true);
-  // const [logged, setLogged] = React.useState('');
+const Modal = ({show, setShow, setLogged, loginForm, setLoginForm}) => {
+  const [username, setUsername] = React.useState(()=>{
+    if (localStorage.getItem('username') === null) return ''
+    else return JSON.parse(localStorage.getItem('username'))
+  });
+  const [email, setEmail] = React.useState(()=>{
+    if (localStorage.getItem('username') === null) return ''
+    else return JSON.parse(localStorage.getItem('username'))
+  });
 
   function onChange(event){
     const {name, value} = event.target
-    localStorage.setItem(name, JSON.stringify(value))
+    if (name === 'email') {
+      setUsername(value)
+      localStorage.setItem(name, JSON.stringify(value))
+    }
+    if (name === 'username')  {
+      setEmail(value)
+      localStorage.setItem(name, JSON.stringify(value))
+    }
   }
 
   return(
@@ -40,33 +53,40 @@ const Modal = ({show, setShow}) => {
                     name={'email'}
                     onChange={onChange}
                     type='email'
-                    value={'email'}
+                    placeholder={'email'}
+                    value={email}
                   />
                 </InputWrapper>
-
               }
               <InputWrapper>
                 <InputModal
                   id={'username'}
                   name={'username'}
                   onChange={onChange}
+                  placeholder={'username'}
                   type='text'
-                  value={'username'}
+                  value={username}
                 />
               </InputWrapper>
               {!loginForm &&
                 <small>By creating an account, you agree to our Terms of Use, and acknowledge that you have read our Privacy Policy, Cookies Policy and UK & EU Privacy Rights.</small>
               }
-              <ButtonModal>
-                {loginForm? 'Entrar' : 'Crear cuenta'}
+              <ButtonModal
+                onClick={()=>{
+                  localStorage.setItem('logged', JSON.stringify(true))
+                  setLogged(true)
+                  setShow(false)
+                }}
+              >
+                {loginForm? 'Login' : 'Create account'}
               </ButtonModal>
               <Flex5Baseline>
-                <small>{loginForm? '¿Necesitas una cuenta?' : '¿Ya tienes una cuenta?'}</small>
+                <small>{loginForm? 'Need an account?' : 'Already have an account?'}</small>
                 {loginForm &&
                   <LoginButton
                     onClick={()=>{setLoginForm(false)}}
                   >
-                    Sign In
+                    Sign Up
                   </LoginButton>
                 }
                 {!loginForm &&
