@@ -50,7 +50,7 @@ const Starships = () => {
           }
         )}
         {/*TODO: Bonus - scroll infinit*/}
-        {apiUrl !== null &&
+        {apiUrl !== null && !loading &&
           <StarshipButtonContainer>
             <StarshipButton onClick={() => setPage(prevState => prevState + 1)}>View more</StarshipButton>
           </StarshipButtonContainer>

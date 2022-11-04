@@ -1,9 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import {Header, Logo, LoginContainer, LinksMenu, LinkMenu, LogoContainer} from "./NavbarStyled";
+import {
+  Header,
+  Logo,
+  LoginContainer,
+  LinksMenu,
+  LinkMenu,
+  LogoContainer,
+  LoginButton,
+} from "./NavbarStyled";
+import Modal from "../Modal/Modal";
 import logo from "../../assets/sw-logo.png";
 
 const Navbar = () => {
+  const [loginModal, setLoginModal] = useState(false);
+  const [loginForm, setLoginForm] = React.useState(true);
+
   return (
     <div>
       <Header>
@@ -11,9 +23,16 @@ const Navbar = () => {
           <Logo src={logo}/>
         </LogoContainer>
         <LoginContainer>
-          <Link to={'/login'}>Log in</Link>
+          <LoginButton onClick={()=>setLoginModal(!loginModal)}>
+            Log in
+          </LoginButton>
           <p>//</p>
-          <Link to={'/signup'}>Sign up</Link>
+          <LoginButton onClick={()=> {
+            setLoginForm(!loginForm)
+            setLoginModal(!loginModal)
+          }}>
+            Sign up
+          </LoginButton>
         </LoginContainer>
       </Header>
       <LinksMenu>
@@ -24,6 +43,12 @@ const Navbar = () => {
           <Link to={'/starships/'}>Starships</Link>
         </LinkMenu>
       </LinksMenu>
+      <Modal
+        show={loginModal}
+        setShow={setLoginModal}
+        form={loginForm}
+      >
+      </Modal>
     </div>
   )
 }

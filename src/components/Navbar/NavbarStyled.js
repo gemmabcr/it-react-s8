@@ -45,3 +45,26 @@ export const LinkMenu = styled.div `
   border: 0.5px solid rgba(255,255,255,0.39);
   padding: 0.5rem;
 `;
+
+export const LoginButton = styled.button `
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.60);
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+  height: auto;
+  letter-spacing: 1px;
+  line-height: 1.3rem;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  &:hover{
+    color: rgba(255,255,255,0.87);
+  }
+`;
