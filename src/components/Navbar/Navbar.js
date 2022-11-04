@@ -45,8 +45,11 @@ const Navbar = () => {
         {logged &&
           <LoginContainer>
             <p>{JSON.parse(localStorage.getItem('username'))}</p>
-            <LoginButton onClick={()=>
-              setLogged(false)}>
+            <LoginButton onClick={()=> {
+              localStorage.setItem('logged', JSON.stringify(false))
+              setLogged(false)
+            }}
+            >
               Log Out
             </LoginButton>
           </LoginContainer>
