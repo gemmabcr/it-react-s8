@@ -16,7 +16,7 @@ const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [loginForm, setLoginForm] = React.useState(true);
   const [logged, setLogged] = React.useState(()=>{
-    return localStorage.getItem('logged')
+    return JSON.parse(localStorage.getItem('logged')) === true
   });
 
   return (
@@ -45,6 +45,10 @@ const Navbar = () => {
         {logged &&
           <LoginContainer>
             <p>{JSON.parse(localStorage.getItem('username'))}</p>
+            <LoginButton onClick={()=>
+              setLogged(false)}>
+              Log Out
+            </LoginButton>
           </LoginContainer>
         }
       </Header>
