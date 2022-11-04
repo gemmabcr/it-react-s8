@@ -113,6 +113,13 @@ export const ButtonModal = styled.button `
   }
 `;
 
+export const Flex5Baseline = styled.div `
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+
+`;
+
 export const LoginButton = styled.button `
   background-color: transparent;
   border: none;

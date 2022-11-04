@@ -1,5 +1,16 @@
 import React, {Fragment} from "react";
-import {Overlay, WrapperModal, HeaderModal, ContentModal, InputWrapper, InputModal, ButtonModal, CloseButton, LoginButton} from "./ModalStyled";
+import {
+  Overlay,
+  WrapperModal,
+  HeaderModal,
+  ContentModal,
+  InputWrapper,
+  InputModal,
+  ButtonModal,
+  CloseButton,
+  LoginButton,
+  Flex5Baseline,
+} from "./ModalStyled";
 
 const Modal = ({show, setShow}) => {
   const [loginForm, setLoginForm] = React.useState(true);
@@ -49,7 +60,7 @@ const Modal = ({show, setShow}) => {
               <ButtonModal>
                 {loginForm? 'Entrar' : 'Crear cuenta'}
               </ButtonModal>
-              <div style={{display: 'flex', gap: '0.5rem', alignItems: 'baseline'}}>
+              <Flex5Baseline>
                 <small>{loginForm? '¿Necesitas una cuenta?' : '¿Ya tienes una cuenta?'}</small>
                 {loginForm &&
                   <LoginButton
@@ -65,7 +76,7 @@ const Modal = ({show, setShow}) => {
                     Log In
                   </LoginButton>
                 }
-              </div>
+              </Flex5Baseline>
             </ContentModal>
           </WrapperModal>
         </Overlay>
