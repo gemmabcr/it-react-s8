@@ -75,6 +75,11 @@ export const ContentModal = styled.div `
   padding: 0 1rem;
 `;
 
+export const InputWrapper = styled.div `
+  display: flex;
+  width: 100%;
+`;
+
 export const InputModal = styled.input `
   border-color: inherit;
   border-radius: 3px;
@@ -98,7 +103,6 @@ export const ButtonModal = styled.button `
   font-weight: bold;
   letter-spacing: 2px;
   line-height: 2.5rem;
-  max-width: 220px;
   padding-top: 0;
   text-shadow: none;
   transition: .3s ease all;

@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {Overlay, WrapperModal, HeaderModal, ContentModal, InputModal, ButtonModal, CloseButton, LoginButton} from "./ModalStyled";
+import {Overlay, WrapperModal, HeaderModal, ContentModal, InputWrapper, InputModal, ButtonModal, CloseButton, LoginButton} from "./ModalStyled";
 
 const Modal = ({show, setShow}) => {
   const [loginForm, setLoginForm] = React.useState(true);
@@ -23,25 +23,32 @@ const Modal = ({show, setShow}) => {
             </CloseButton>
             <ContentModal>
               {!loginForm &&
-                <InputModal
-                  id={'email'}
-                  name={'email'}
-                  onChange={onChange}
-                  type='email'
-                  value={'email'}
-                />
+                <InputWrapper>
+                  <InputModal
+                    id={'email'}
+                    name={'email'}
+                    onChange={onChange}
+                    type='email'
+                    value={'email'}
+                  />
+                </InputWrapper>
+
               }
-              <InputModal
-                id={'username'}
-                name={'username'}
-                onChange={onChange}
-                type='text'
-                value={'username'}
-              />
+              <InputWrapper>
+                <InputModal
+                  id={'username'}
+                  name={'username'}
+                  onChange={onChange}
+                  type='text'
+                  value={'username'}
+                />
+              </InputWrapper>
               {!loginForm &&
                 <small>By creating an account, you agree to our Terms of Use, and acknowledge that you have read our Privacy Policy, Cookies Policy and UK & EU Privacy Rights.</small>
               }
-              <ButtonModal>{loginForm? 'Entrar' : 'Crear cuenta'}</ButtonModal>
+              <ButtonModal>
+                {loginForm? 'Entrar' : 'Crear cuenta'}
+              </ButtonModal>
               <div style={{display: 'flex', gap: '0.5rem', alignItems: 'baseline'}}>
                 <small>{loginForm? '¿Necesitas una cuenta?' : '¿Ya tienes una cuenta?'}</small>
                 {loginForm &&
