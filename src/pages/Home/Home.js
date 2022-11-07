@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { HomeContent } from "./HomeStyled";
+import { StarshipButton } from "../Starships/StarshipsStyled";
 import { useLoggedContext } from "../../application/PageLayout";
-import {StarshipButton} from "../Starships/StarshipsStyled";
-import {Link} from "react-router-dom";
 
 const Home = () => {
   const [logged, setLogged] = useLoggedContext ();

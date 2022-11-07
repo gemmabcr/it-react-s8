@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const StarshipDetailWrapper = styled.section `
+  padding: 1rem;
+`;
+
 export const ImageContainer = styled.img `
   border-bottom: 1px solid darkblue;
   height: 400px;

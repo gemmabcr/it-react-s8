@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../components/Home/Home";
-import Starships from "../components/Starships/Starships";
-import StarshipDetail from "../components/StarshipDetail/StarshipDetail";
+import Home from "../pages/Home/Home";
+import Starships from "../pages/Starships/Starships";
+import StarshipDetail from "../pages/StarshipDetail/StarshipDetail";
 import PageLayout from "./PageLayout";
 
 const Router = () => (
