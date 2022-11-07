@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { StarshipDetailWrapper, DetailName, ImageContainer, ColumnsInfo, PilotsSection } from "./StarshipDetailStyled";
-import Card from "../../components/Card/Card";
+import Card from "../../components/PilotCard/Card";
+import FilmCard from "../../components/FilmCard/FilmCard";
 
 const StarshipDetail = () => {
   const {id} = useParams()
@@ -56,6 +57,20 @@ const StarshipDetail = () => {
                   const idPilot = splitedUrlPilot[5]
                   return (
                       <Card key={pilot} url={pilot} id={idPilot}/>
+                  )
+                })}
+              </ColumnsInfo>
+            </PilotsSection>
+          }
+          {starship.films && starship.films.length > 0 &&
+            <PilotsSection>
+              <p>Films</p>
+              <ColumnsInfo>
+                {starship.films.map(film => {
+                  const splitedUrlFilm = film.split('/');
+                  const idFilm = splitedUrlFilm[5]
+                  return (
+                    <FilmCard key={film} url={film} id={idFilm}/>
                   )
                 })}
               </ColumnsInfo>
