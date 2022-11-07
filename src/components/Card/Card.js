@@ -1,23 +1,37 @@
-import styled from "styled-components";
+import React from "react";
+import { CardContainer, CardContent } from "./CardStyled";
 
-const Card = () => {
+const Card = ({url}) => {
+  const [item, setItem] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(()=>{
+    fetch(url)
+      .then((response) => response.json())
+      .then(data => setItem(data))
+      .catch((error) => {console.log(error)})
+      .finally(()=>{setLoading(false)})
+  })
+
   return(
     <CardContainer>
-      <h1>Holi</h1>
+      {loading && <p>Loading...</p>}
+      {!loading &&
+        <CardContent>
+          <p>Name: {item.name}</p>
+          <p>Birth year: {item.birth_year}</p>
+          <p>Eye color: {item.eye_color}</p>
+          <p>Gender: {item.gender}</p>
+          <p>Hair color: {item.hair_color}</p>
+          <p>Skin color: {item.skin_color}</p>
+          <p>Height: {item.height}</p>
+          <p>Homeworld: {item.homeworld}</p>
+          <p>Mass: {item.mass}</p>
+          <p>Species: {item.species}</p>
+        </CardContent>
+      }
     </CardContainer>
   )
 };
 
 export default Card;
-
-export const CardContainer = styled.div `
-  background-color: #2a2a2a;
-  border-radius: 0.1875rem;
-  color: #b9b9b9;
-  margin: 0 auto;
-  max-width: 100rem;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-  width: 100%;
-`;

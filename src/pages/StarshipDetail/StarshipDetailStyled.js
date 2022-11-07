@@ -23,5 +23,12 @@ export const DetailName = styled.p `
 export const ColumnsInfo = styled.div `
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-row-gap: 1rem;
+  gap: 1rem;
+`;
+
+export const PilotsSection = styled.div `
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 2rem;
 `;
