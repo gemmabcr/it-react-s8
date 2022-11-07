@@ -19,6 +19,21 @@ const Navbar = () => {
     return JSON.parse(localStorage.getItem('logged')) === true
   });
 
+  function loginButton(){
+    setLoginForm(true)
+    setLoginModal(!loginModal)
+  }
+
+  function signupButton(){
+    setLoginForm(false)
+    setLoginModal(!loginModal)
+  }
+
+  function logoutButton(){
+    localStorage.setItem('logged', JSON.stringify(false))
+    setLogged(false)
+  }
+
   return (
     <div>
       <Header>
@@ -27,17 +42,11 @@ const Navbar = () => {
         </LogoContainer>
         {!logged &&
           <LoginContainer>
-            <LoginButton onClick={()=> {
-              setLoginForm(true)
-              setLoginModal(!loginModal)
-            }}>
+            <LoginButton onClick={()=> loginButton()}>
               Log in
             </LoginButton>
             <p>//</p>
-            <LoginButton onClick={()=> {
-              setLoginForm(false)
-              setLoginModal(!loginModal)
-            }}>
+            <LoginButton onClick={()=> signupButton()}>
               Sign up
             </LoginButton>
           </LoginContainer>
@@ -45,11 +54,7 @@ const Navbar = () => {
         {logged &&
           <LoginContainer>
             <p>{JSON.parse(localStorage.getItem('username'))}</p>
-            <LoginButton onClick={()=> {
-              localStorage.setItem('logged', JSON.stringify(false))
-              setLogged(false)
-            }}
-            >
+            <LoginButton onClick={()=> logoutButton()}>
               Log Out
             </LoginButton>
           </LoginContainer>

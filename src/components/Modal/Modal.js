@@ -13,13 +13,19 @@ import {
 } from "./ModalStyled";
 
 const Modal = ({show, setShow, setLogged, loginForm, setLoginForm}) => {
+
   const [username, setUsername] = React.useState(()=>{
-    if (localStorage.getItem('username') === null) return ''
-    else return JSON.parse(localStorage.getItem('username'))
+    if (localStorage.getItem('username') === null)
+      return ''
+    else
+      return JSON.parse(localStorage.getItem('username'))
   });
+
   const [email, setEmail] = React.useState(()=>{
-    if (localStorage.getItem('username') === null) return ''
-    else return JSON.parse(localStorage.getItem('username'))
+    if (localStorage.getItem('email') === null)
+      return ''
+    else
+      return JSON.parse(localStorage.getItem('email'))
   });
 
   function onChange(event){
@@ -34,6 +40,23 @@ const Modal = ({show, setShow, setLogged, loginForm, setLoginForm}) => {
     }
   }
 
+  function closeModal(){
+    setShow(false)
+  }
+
+  function toogleLoginForm(){
+    if (loginForm)
+      setLoginForm(false)
+    else
+      setLoginForm(true)
+  }
+
+  function submit(){
+    localStorage.setItem('logged', JSON.stringify(true))
+    setLogged(true)
+    closeModal()
+  }
+
   return(
     <Fragment>
       {show &&
@@ -42,7 +65,7 @@ const Modal = ({show, setShow, setLogged, loginForm, setLoginForm}) => {
             <HeaderModal>
               <h2>{loginForm ? 'Enter your mail address' : 'Create your account'}</h2>
             </HeaderModal>
-            <CloseButton onClick={()=>setShow(false)}>
+            <CloseButton onClick={()=>closeModal()}>
               X
             </CloseButton>
             <ContentModal>
@@ -52,8 +75,8 @@ const Modal = ({show, setShow, setLogged, loginForm, setLoginForm}) => {
                     id={'email'}
                     name={'email'}
                     onChange={onChange}
-                    type='email'
                     placeholder={'email'}
+                    type='email'
                     value={email}
                   />
                 </InputWrapper>
@@ -69,33 +92,22 @@ const Modal = ({show, setShow, setLogged, loginForm, setLoginForm}) => {
                 />
               </InputWrapper>
               {!loginForm &&
-                <small>By creating an account, you agree to our Terms of Use, and acknowledge that you have read our Privacy Policy, Cookies Policy and UK & EU Privacy Rights.</small>
+                <small>
+                  By creating an account, you agree to our Terms of Use, and acknowledge that you have read our Privacy Policy, Cookies Policy and UK & EU Privacy Rights.
+                </small>
               }
               <ButtonModal
-                onClick={()=>{
-                  localStorage.setItem('logged', JSON.stringify(true))
-                  setLogged(true)
-                  setShow(false)
-                }}
+                onClick={()=>submit()}
               >
                 {loginForm? 'Login' : 'Create account'}
               </ButtonModal>
               <Flex5Baseline>
-                <small>{loginForm? 'Need an account?' : 'Already have an account?'}</small>
-                {loginForm &&
-                  <LoginButton
-                    onClick={()=>{setLoginForm(false)}}
-                  >
-                    Sign Up
-                  </LoginButton>
-                }
-                {!loginForm &&
-                  <LoginButton
-                    onClick={()=>{setLoginForm(true)}}
-                  >
-                    Log In
-                  </LoginButton>
-                }
+                <small>
+                  {loginForm? 'Need an account?' : 'Already have an account?'}
+                </small>
+                <LoginButton onClick={()=>toogleLoginForm()}>
+                  {loginForm? 'Sign Up' : 'Log In'}
+                </LoginButton>
               </Flex5Baseline>
             </ContentModal>
           </WrapperModal>
