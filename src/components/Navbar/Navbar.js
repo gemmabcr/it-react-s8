@@ -12,12 +12,9 @@ import {
 import Modal from "../Modal/Modal";
 import logo from "../../assets/sw-logo.png";
 
-const Navbar = () => {
+const Navbar = ({logged, setLogged}) => {
   const [loginModal, setLoginModal] = useState(false);
   const [loginForm, setLoginForm] = React.useState(true);
-  const [logged, setLogged] = React.useState(()=>{
-    return JSON.parse(localStorage.getItem('logged')) === true
-  });
 
   function loginButton(){
     setLoginForm(true)

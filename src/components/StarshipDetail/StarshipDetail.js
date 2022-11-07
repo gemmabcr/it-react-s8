@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import {DetailName, ImageContainer, ColumnsInfo} from "./StarshipDetailStyled";
 
 const StarshipDetail = () => {
@@ -23,7 +22,6 @@ const StarshipDetail = () => {
 
   return (
     <div>
-      <Navbar />
       <section>
         {starship !== undefined &&
           <div>

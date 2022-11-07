@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import {
   StarshipCard,
   StarshipCardTitle,
@@ -32,31 +31,28 @@ const Starships = () => {
   },[page]);
 
   return(
-    <div>
-      <Navbar />
-      <section>
-        {loading && <p>Loading</p>}
-        {!loading && starships.map((starship, index) => {
-          const splitedUrlStarship = starship.url.split('/');
-          const urlStarship = splitedUrlStarship[5]
-          return (
-            <Link to={`/starships/${urlStarship}`} key={index}>
-              <StarshipCard>
-                <StarshipCardTitle>{(starship.name).toUpperCase()}</StarshipCardTitle>
-                <StarshipCardSubtitle>{starship.model}</StarshipCardSubtitle>
-              </StarshipCard>
-            </Link>
-            )
-          }
-        )}
-        {/*TODO: Bonus - scroll infinit*/}
-        {apiUrl !== null && !loading &&
-          <StarshipButtonContainer>
-            <StarshipButton onClick={() => setPage(prevState => prevState + 1)}>View more</StarshipButton>
-          </StarshipButtonContainer>
+    <section>
+      {loading && <p>Loading</p>}
+      {!loading && starships.map((starship, index) => {
+        const splitedUrlStarship = starship.url.split('/');
+        const urlStarship = splitedUrlStarship[5]
+        return (
+          <Link to={`/starships/${urlStarship}`} key={index}>
+            <StarshipCard>
+              <StarshipCardTitle>{(starship.name).toUpperCase()}</StarshipCardTitle>
+              <StarshipCardSubtitle>{starship.model}</StarshipCardSubtitle>
+            </StarshipCard>
+          </Link>
+          )
         }
-      </section>
-    </div>
+      )}
+      {/*TODO: Bonus - scroll infinit*/}
+      {apiUrl !== null && !loading &&
+        <StarshipButtonContainer>
+          <StarshipButton onClick={() => setPage(prevState => prevState + 1)}>View more</StarshipButton>
+        </StarshipButtonContainer>
+      }
+    </section>
   )
 }
 

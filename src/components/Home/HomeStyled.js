@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const HomeWrapper = styled.div `
-  height: 100vh;
-  width: 100vw;
-`;
-
 export const HomeContent = styled.div `
   align-items: center;
   display: flex;
