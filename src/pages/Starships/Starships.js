@@ -32,7 +32,7 @@ const Starships = () => {
 
   return(
     <section>
-      {loading && <p>Loading</p>}
+      {loading && <p>Loading...</p>}
       {!loading && starships.map((starship, index) => {
         const splitedUrlStarship = starship.url.split('/');
         const urlStarship = splitedUrlStarship[5]
