@@ -1,15 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { StarshipButton } from "../Starships/StarshipsStyled";
 import { HomeContent } from "./HomeStyled";
+import { useLoggedContext } from "../../application/PageLayout";
+import { StarshipButton } from "../Starships/StarshipsStyled";
 
 const Home = () => {
+  const [logged, setLogged] = useLoggedContext ();
+
   return (
     <HomeContent>
-      <h1>Welcome friend!</h1>
-      <Link to={'/starships'}>
-        <StarshipButton>Start the journey</StarshipButton>
-      </Link>
+      {logged &&
+        <h1>Welcome back, friend!</h1>
+      }
+      {!logged &&
+        <StarshipButton onClick={()=>{}}>
+          Login to start the journey
+        </StarshipButton>
+      }
     </HomeContent>
   )
 }

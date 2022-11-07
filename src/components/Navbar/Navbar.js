@@ -11,8 +11,10 @@ import {
 } from "./NavbarStyled";
 import Modal from "../Modal/Modal";
 import logo from "../../assets/sw-logo.png";
+import {useLoggedContext} from "../../application/PageLayout";
 
-const Navbar = ({logged, setLogged}) => {
+const Navbar = () => {
+  const [logged, setLogged] = useLoggedContext ();
   const [loginModal, setLoginModal] = useState(false);
   const [loginForm, setLoginForm] = React.useState(true);
 

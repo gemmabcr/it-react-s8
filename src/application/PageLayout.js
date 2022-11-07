@@ -1,20 +1,30 @@
+import React, {createContext, useContext} from "react";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "../components/Navbar/Navbar";
-import {Outlet} from "react-router-dom";
-import React from "react";
 
-const PageLayout = () => {
+export const AppProvider = createContext();
+export const useLoggedContext = () => useContext(AppProvider);
+
+const Provider = ({ children }) =>{
   const [logged, setLogged] = React.useState(()=>{
     return JSON.parse(localStorage.getItem('logged')) === true
   });
 
   return (
+    <AppProvider.Provider value={[logged, setLogged]}>
+      {children}
+    </AppProvider.Provider>
+  );
+}
+
+const PageLayout = () => {
+  return (
     <PageWrapper>
-      <Navbar
-        logged={logged}
-        setLogged={setLogged}
-      />
-      <Outlet />
+      <Provider>
+        <Navbar />
+        <Outlet />
+      </Provider>
     </PageWrapper>
   )
 }
