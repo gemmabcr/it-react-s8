@@ -51,7 +51,13 @@ const StarshipDetail = () => {
             <PilotsSection>
               <p>Pilots</p>
               <ColumnsInfo>
-                {starship.pilots.map(pilot => <Card key={pilot} url={pilot} />)}
+                {starship.pilots.map(pilot => {
+                  const splitedUrlPilot = pilot.split('/');
+                  const idPilot = splitedUrlPilot[5]
+                  return (
+                      <Card key={pilot} url={pilot} id={idPilot}/>
+                  )
+                })}
               </ColumnsInfo>
             </PilotsSection>
           }
