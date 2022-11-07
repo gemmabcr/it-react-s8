@@ -64,7 +64,8 @@ const Navbar = () => {
           <Link to={'/'}>Home</Link>
         </LinkMenu>
         <LinkMenu>
-          <Link to={'/starships/'}>Starships</Link>
+          {logged && <Link to={'/starships/'}>Starships</Link>}
+          {!logged && <Link to={'/'}>Starships</Link>}
         </LinkMenu>
       </LinksMenu>
       <Modal
